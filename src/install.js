@@ -13,6 +13,8 @@ if (!fs.existsSync(dir)){
 
 const file = fs.createWriteStream("bin/mocks-server.jar");
 
+logger.info('Le récupération de mock-server.');
+
 request.get({
     uri: properties.get('repository')
 })
