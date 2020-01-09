@@ -5,6 +5,12 @@ const PropertiesReader = require('properties-reader');
 const properties = new PropertiesReader(__dirname + '/../mocks-server.properties');
 const logger = require('./logger');
 
+const dir = './bin';
+
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+}
+
 const file = fs.createWriteStream("bin/mocks-server.jar");
 
 request.get({
