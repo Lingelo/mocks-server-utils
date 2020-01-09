@@ -1,0 +1,11 @@
+{
+	"httpRequest": {
+          "method" : "GET",
+          "path" : "/test"
+	},
+	
+	"httpResponse": {
+        "statusCode": 200,
+        "body": "some_response_body"
+    }
+}
