@@ -17,7 +17,7 @@ function checkServerStatus() {
     return new Promise((resolve, reject) => {
         request.put(`http://${properties.get('host')}:${properties.get('port')}/status`)
             .on('error', () => {
-                logger.error('Server connecté.');
+                logger.error('Server déconnecté.');
                 reject();
             })
             .on('data', () => {
