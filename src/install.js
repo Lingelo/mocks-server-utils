@@ -1,4 +1,4 @@
-const request = require('request');
+let request = require('request');
 const fs = require('fs');
 
 const PropertiesReader = require('properties-reader');
@@ -12,6 +12,10 @@ if (!fs.existsSync(dir)){
 }
 
 const file = fs.createWriteStream("bin/mocks-server.jar");
+
+if (properties.get('http-proxy')) {
+    request = request.defaults(properties.get('http-proxy'))
+}
 
 logger.info('Le récupération de mock-server.');
 

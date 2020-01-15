@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "java -jar bin/mocks-server.jar -serverPort 1080",
+    "start": "node src/start.js",
     "install": "node src/install.js",
     "init:mocks": "node src/mocks.js"
   },
