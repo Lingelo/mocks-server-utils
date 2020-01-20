@@ -14,7 +14,7 @@ if (!fs.existsSync(dir)){
 const file = fs.createWriteStream("bin/mocks-server.jar");
 
 if (properties.get('http-proxy')) {
-    request = request.defaults(properties.get('http-proxy'))
+    request = request.defaults({'proxy': properties.get('http-proxy')});
 }
 
 logger.info('Le récupération de mock-server.');
