@@ -17,7 +17,7 @@ if (properties.get('http-proxy')) {
     request = request.defaults({'proxy': properties.get('http-proxy')});
 }
 
-logger.info('Le récupération de mock-server.');
+logger.info('Début de récupération de mockserver.jar.');
 
 request.get({
     uri: properties.get('repository')
