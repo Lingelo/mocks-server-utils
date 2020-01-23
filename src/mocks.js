@@ -4,7 +4,7 @@ const PropertiesReader = require('properties-reader');
 const properties = new PropertiesReader(__dirname + '/../mocks-server.properties');
 const logger = require('./logger');
 
-const mocksFolder = __dirname + '/../mocks/';
+const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : __dirname + '/../mocks/';
 
 function run() {
     checkServerStatus()
@@ -32,12 +32,12 @@ function initMocks() {
     fs.readdir(mocksFolder, (err, files) => {
 
         if (!files) {
-            logger.warn('Server déconnecté, arrêt du processus.');
+            logger.error('Dossier mocks invalide, arrêt du processus.');
             process.exit();
         }
 
         files.forEach(file => {
-            fs.readFile(mocksFolder + file, 'utf8', (err, data) => {
+            fs.readFile( mocksFolder + '/' + file, 'utf8', (err, data) => {
                 if (err) {
                     throw new Error(JSON.stringify(err))
                 }
