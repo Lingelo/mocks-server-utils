@@ -15,7 +15,7 @@ function run() {
 function checkServerStatus() {
 
     return new Promise((resolve, reject) => {
-        request.put(`http://${properties.get('host')}:${properties.get('port')}/status`)
+        request.get(`http://${properties.get('host')}:${properties.get('port')}/__admin/requests/`)
             .on('error', () => {
                 logger.error('Server déconnecté.');
                 reject();
@@ -42,7 +42,7 @@ function initMocks() {
                     throw new Error(JSON.stringify(err))
                 }
 
-                request.put(`http://${properties.get('host')}:${properties.get('port')}/mockserver/expectation`, {form: data})
+                request.post(`http://${properties.get('host')}:${properties.get('port')}/__admin/mappings/new`, {form: data})
                     .on('error', () => {
                         logger.warn('Le server s\'est déconnecté, arrêt du processus.');
                         process.exit();

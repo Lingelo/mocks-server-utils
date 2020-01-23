@@ -14,8 +14,8 @@ if (!fs.existsSync(dir)){
 const mockServer = spawn('java', [
     `-jar`,
     'bin/mocks-server.jar',
-    '-serverPort', properties.get('port'),
-    '-logLevel', properties.get('server-log-level')
+    '--port', properties.get('port'),
+    '--verbose'
 ]);
 
 mockServer.stdout.on('data', function (data) {
