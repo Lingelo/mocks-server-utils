@@ -1,10 +1,9 @@
-const PropertiesReader = require('properties-reader');
-const properties = new PropertiesReader(__dirname + '/../mocks-server.properties');
-const logger = require('./logger');
-const { spawn } = require('child_process');
 const fs = require('fs');
+const { spawn } = require('child_process');
+const properties = require('./utils/properties');
+const logger = require('./utils/logger');
 
-const dir = __dirname + '/../bin/mocks-server.jar';
+const dir = process.cwd() + '/bin/mocks-server.jar';
 
 if (!fs.existsSync(dir)){
     logger.error('Le binaire n\'a pas été téléchargé. Lancer la commande : npm install');
@@ -19,14 +18,13 @@ const mockServer = spawn('java', [
 ]);
 
 mockServer.stdout.on('data', function (data) {
-    logger.info(data.toString());
+    console.log(data.toString());
 });
 
 mockServer.stderr.on('data', function (data) {
-    logger.error(data.toString());
+    console.log(data.toString());
 });
 
-mockServer.on('exit', function (code) {
+mockServer.on('exit', function () {
     logger.error('Fin du process.');
 });
-

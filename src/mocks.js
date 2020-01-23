@@ -1,10 +1,9 @@
 const fs = require('fs');
 const request = require('request');
-const PropertiesReader = require('properties-reader');
-const properties = new PropertiesReader(__dirname + '/../mocks-server.properties');
-const logger = require('./logger');
+const properties = require('./utils/properties');
+const logger = require('./utils/logger');
 
-const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : __dirname + '/../mocks/';
+const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : process.cwd() + '/mocks/';
 
 function run() {
     checkServerStatus()
@@ -60,4 +59,3 @@ function initMocks() {
 }
 
 run();
-

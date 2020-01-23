@@ -1,17 +1,16 @@
 let request = require('request');
 const fs = require('fs');
 
-const PropertiesReader = require('properties-reader');
-const properties = new PropertiesReader(__dirname + '/../mocks-server.properties');
-const logger = require('./logger');
+const properties = require('./utils/properties');
+const logger = require('./utils/logger');
 
-const dir = './bin';
+const dir = process.cwd() + '/bin';
 
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
 
-const file = fs.createWriteStream("bin/mocks-server.jar");
+const file = fs.createWriteStream(process.cwd() + "/bin/mocks-server.jar");
 
 if (properties.get('http-proxy')) {
     request = request.defaults({'proxy': properties.get('http-proxy')});
