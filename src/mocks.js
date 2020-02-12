@@ -6,9 +6,12 @@ const logger = require('./utils/logger');
 const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : process.cwd() + '/mocks/';
 
 function run() {
-    checkServerStatus()
-        .then(() => initMocks())
-        .catch(() => process.exit());
+    logger.info('Le processus attend 5 secondes que le server se lance.');
+    setTimeout(() => {
+        checkServerStatus()
+            .then(() => initMocks())
+            .catch(() => process.exit())
+    }, 5000);
 }
 
 function checkServerStatus() {
@@ -36,7 +39,7 @@ function initMocks() {
         }
 
         files.forEach(file => {
-            fs.readFile( mocksFolder + '/' + file, 'utf8', (err, data) => {
+            fs.readFile(mocksFolder + '/' + file, 'utf8', (err, data) => {
                 if (err) {
                     throw new Error(JSON.stringify(err))
                 }

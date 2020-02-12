@@ -5,6 +5,7 @@ Il permet permet de mocker n'importe quel backend.
 
 ## Usages
 
+# En local
 * Installer le server `npm install`
 * Démarrer le server `npm start` (dans une console à part)
 * Les mocks sont dans le dossier `mocks` pour lancer leur intialisation : `npm run init:mocks`
@@ -12,3 +13,9 @@ Il permet permet de mocker n'importe quel backend.
 * La configuration du projet est sous `mocks-server.properties`
 
 L'utilitaire se configure à travers `mocks-server.properties`
+
+# Via image docker
+
+* Recupérer l'image docker : `docker pull freuhlon/mockserver:lastest`
+* Lancer un container jettable : `docker run -d -p 1080:1080 --name mockserver --rm freuhlon/mockserver
+`
