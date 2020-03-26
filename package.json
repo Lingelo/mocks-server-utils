@@ -10,7 +10,7 @@
   "author": "Angélo LIMA",
   "license": "ISC",
   "dependencies": {
-    "properties-reader": "^0.3.1",
+    "properties-reader": "1.0.0",
     "request": "^2.88.0",
     "winston": "^3.2.1",
     "winston-pretty-console": "^0.1.1"
