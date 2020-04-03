@@ -44,7 +44,13 @@ function initMocks() {
                     throw new Error(JSON.stringify(err))
                 }
 
-                request.post(`http://${properties.get('host')}:${properties.get('port')}/__admin/mappings/new`, {form: data})
+                const option = {
+                    uri: `http://${properties.get('host')}:${properties.get('port')}/__admin/mappings/new`,
+                        body: data,
+                    method: 'POST'
+                };
+
+                request(option)
                     .on('error', () => {
                         logger.warn('Le server s\'est déconnecté, arrêt du processus.');
                         process.exit();
@@ -53,7 +59,9 @@ function initMocks() {
                         if (res.statusCode >= 200 && res.statusCode < 400) {
                             logger.info(`Mock ${file} créé.`);
                         } else {
-                            logger.error(`Mock non ${file} créé.`);
+                            console.log(res)
+
+                            logger.error(`Mock ${file} non créé.`);
                         }
                     });
             });
