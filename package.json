@@ -9,6 +9,10 @@
   },
   "author": "Angélo LIMA",
   "license": "ISC",
+  "engines": {
+    "node": ">=10.16.3",
+    "npm": ">=6.14.2"
+  },
   "dependencies": {
     "md5-file": "5.0.0",
     "properties-reader": "1.0.0",
