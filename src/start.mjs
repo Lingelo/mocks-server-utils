@@ -1,7 +1,7 @@
-const fs = require('fs');
-const { spawn } = require('child_process');
-const properties = require('./utils/properties');
-const logger = require('./utils/logger');
+import fs from 'fs';
+import { spawn } from 'child_process';
+import { properties } from './utils/properties';
+import { logger } from './utils/logger';
 
 const dir = process.cwd() + '/bin/mocks-server.jar';
 

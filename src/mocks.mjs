@@ -1,17 +1,16 @@
-const fs = require('fs');
-const request = require('request');
-const properties = require('./utils/properties');
-const logger = require('./utils/logger');
+import fs from 'fs';
+import request from 'request';
+import md5File from 'md5-file';
+import {properties} from './utils/properties';
+import {logger} from './utils/logger';
 
 const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : process.cwd() + '/mocks/';
+const hashes = [];
 
 function run() {
-    logger.info('Le processus attend 5 secondes que le server se lance.');
-    setTimeout(() => {
-        checkServerStatus()
-            .then(() => initMocks())
-            .catch(() => process.exit())
-    }, 5000);
+    checkServerStatus()
+        .then(() => setInterval(doMock, properties.get('watch-delay')))
+        .catch(() => process.exit())
 }
 
 function checkServerStatus() {
@@ -29,24 +28,32 @@ function checkServerStatus() {
     });
 }
 
-function initMocks() {
-
+function doMock() {
     fs.readdir(mocksFolder, (err, files) => {
-
         if (!files) {
             logger.error('Dossier mocks invalide, arrêt du processus.');
             process.exit();
         }
 
         files.forEach(file => {
+
+            const hash = md5File.sync(mocksFolder + '/' + file);
+            if (!hashes.includes(hash)) {
+                hashes.push(hash)
+            } else {
+                return;
+            }
+
             fs.readFile(mocksFolder + '/' + file, 'utf8', (err, data) => {
                 if (err) {
                     throw new Error(JSON.stringify(err))
                 }
 
+                data = setCorsHeaders(data);
+
                 const option = {
                     uri: `http://${properties.get('host')}:${properties.get('port')}/__admin/mappings/new`,
-                        body: data,
+                    body: data,
                     method: 'POST'
                 };
 
@@ -67,6 +74,26 @@ function initMocks() {
             });
         });
     });
+}
+
+function setCorsHeaders(data) {
+
+    const number = data.indexOf("\"status\": ");
+
+    const headers = "\"headers\":\n" +
+        "    {\n" +
+        "      \"Content-Type\" : \"application/json\",\n" +
+        "      \"Access-Control-Allow-Origin\" : \"*\",\n" +
+        "      \"Access-Control-Allow-Methods\" : \"*\",\n" +
+        "      \"Access-Control-Allow-Headers\": \"*\",\n" +
+        "      \"X-Content-Type-Options\" : \"nosniff\",\n" +
+        "      \"x-frame-options\" : \"DENY\",\n" +
+        "      \"x-xss-protection\" : \"1; mode=block\"\n" +
+        "    },"
+
+    data = data.slice(0, number + "\"status\": ".length + 4) + headers + data.slice(number + "\"status\": ".length + 4);
+
+    return data;
 }
 
 run();

@@ -3,16 +3,17 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node src/start.js",
-    "install": "node src/install.js",
-    "init:mocks": "node src/mocks.js"
+    "start": "node --experimental-modules src/start.mjs",
+    "install": "node --experimental-modules src/install.mjs",
+    "mocks": "node --experimental-modules src/mocks.mjs"
   },
   "author": "Angélo LIMA",
   "license": "ISC",
   "dependencies": {
+    "md5-file": "5.0.0",
     "properties-reader": "1.0.0",
-    "request": "^2.88.0",
-    "winston": "^3.2.1",
-    "winston-pretty-console": "^0.1.1"
+    "request": "2.88.0",
+    "winston": "3.2.1",
+    "winston-pretty-console": "0.1.1"
   }
 }

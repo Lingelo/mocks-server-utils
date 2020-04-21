@@ -5,16 +5,6 @@
   },
   "response": {
     "status": 200,
-    "headers":
-    {
-      "Content-Type" : "application/json",
-      "Access-Control-Allow-Origin" : "*",
-      "Access-Control-Allow-Methods" : "*",
-      "Access-Control-Allow-Headers": "*",
-      "X-Content-Type-Options" : "nosniff",
-      "x-frame-options" : "DENY",
-      "x-xss-protection" : "1; mode=block"
-    },
     "jsonBody": [
       {
         "id": "EX1_116",
