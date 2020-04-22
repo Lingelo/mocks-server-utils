@@ -1,20 +1,20 @@
 # Utilitaire de server de mocks
 
-Ce projet permet de démarrér rapidement [http://wiremock.org/](http://wiremock.org//) avec des mocks paramétrés.
-Il permet permet de mocker n'importe quel backend.
+Ce projet permet de démarrer rapidement [http://wiremock.org/](http://wiremock.org//) avec des mocks paramétrés.
+Il permet de mocker n'importe quel backend fournissant des APIs REST.
 
-## Usages
+## Démarrage rapide
 
 # En local
-* Installer le server `npm install`
-* Démarrer le server `npm start` (dans une console à part)
-* Les mocks sont dans le dossier `mocks`, la commande `npm run mocks` scrute le dossier contenant les mocks.
-* Ajouter de nouveaux `mocks`, ajouter un fichier `.json` sous `mocks` puis y ajouter le `stubning` qui mock l'url souhaitée. Voir doucmentation [ici](http://wiremock.org/docs/stubbing/) API Rest. 
-* La configuration du projet est sous `mocks-server.properties`
+* Installer le server `npm install`.
+* Démarrer le server `npm start`.
+* Lancer la scrutation des mocks : `npm run mocks`.
+
+Pour ajouter de nouveaux `mocks`, ajouter un fichier `.json` sous `mocks` puis y ajouter le `stubning` qui mock l'url souhaitée. Voir doucmentation [ici](http://wiremock.org/docs/stubbing/). 
 
 # Paramétrage
 
-L'utilitaire se configure à travers `mocks-server.properties`.
+L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 
 | Propriété   | Description                                                        | Valeur par défaut |
 |-------------|--------------------------------------------------------------------|-------------------|
