@@ -11,18 +11,18 @@ if (!fs.existsSync(dir)){
 }
 
 const mockServer = spawn('java', [
-    `-jar`,
+    '-jar',
     'bin/mocks-server.jar',
     '--port', properties.get('port'),
     '--verbose'
 ]);
 
 mockServer.stdout.on('data', function (data) {
-    console.log(data.toString());
+    logger.info(data.toString());
 });
 
 mockServer.stderr.on('data', function (data) {
-    console.log(data.toString());
+    logger.error(data.toString());
 });
 
 mockServer.on('exit', function () {

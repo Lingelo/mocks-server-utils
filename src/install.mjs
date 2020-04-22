@@ -9,10 +9,10 @@ if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
 }
 
-const file = fs.createWriteStream(process.cwd() + "/bin/mocks-server.jar");
+const file = fs.createWriteStream(process.cwd() + '/bin/mocks-server.jar');
 
 if (properties.get('http-proxy')) {
-    request = request.defaults({'proxy': properties.get('http-proxy')});
+    request = request.defaults({ 'proxy': properties.get('http-proxy') });
 }
 
 logger.info('Début de récupération de mockserver.jar.');

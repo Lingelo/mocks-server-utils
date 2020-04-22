@@ -1,8 +1,8 @@
 import fs from 'fs';
 import request from 'request';
 import md5File from 'md5-file';
-import {properties} from './utils/properties';
-import {logger} from './utils/logger';
+import { properties } from './utils/properties';
+import { logger } from './utils/logger';
 
 const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : process.cwd() + '/mocks/';
 const hashes = [];
@@ -66,8 +66,6 @@ function doMock() {
                         if (res.statusCode >= 200 && res.statusCode < 400) {
                             logger.info(`Mock ${file} créé.`);
                         } else {
-                            console.log(res)
-
                             logger.error(`Mock ${file} non créé.`);
                         }
                     });
@@ -78,20 +76,20 @@ function doMock() {
 
 function setCorsHeaders(data) {
 
-    const number = data.indexOf("\"status\": ");
+    const number = data.indexOf('"status": ');
 
-    const headers = "\"headers\":\n" +
-        "    {\n" +
-        "      \"Content-Type\" : \"application/json\",\n" +
-        "      \"Access-Control-Allow-Origin\" : \"*\",\n" +
-        "      \"Access-Control-Allow-Methods\" : \"*\",\n" +
-        "      \"Access-Control-Allow-Headers\": \"*\",\n" +
-        "      \"X-Content-Type-Options\" : \"nosniff\",\n" +
-        "      \"x-frame-options\" : \"DENY\",\n" +
-        "      \"x-xss-protection\" : \"1; mode=block\"\n" +
-        "    },"
+    const headers = '"headers":\n' +
+        '    {\n' +
+        '      "Content-Type" : "application/json",\n' +
+        '      "Access-Control-Allow-Origin" : "*",\n' +
+        '      "Access-Control-Allow-Methods" : "*",\n' +
+        '      "Access-Control-Allow-Headers": "*",\n' +
+        '      "X-Content-Type-Options" : "nosniff",\n' +
+        '      "x-frame-options" : "DENY",\n' +
+        '      "x-xss-protection" : "1; mode=block"\n' +
+        '    },'
 
-    data = data.slice(0, number + "\"status\": ".length + 4) + headers + data.slice(number + "\"status\": ".length + 4);
+    data = data.slice(0, number + '"status": '.length + 4) + headers + data.slice(number + '"status": '.length + 4);
 
     return data;
 }

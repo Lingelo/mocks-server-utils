@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node --experimental-modules src/start.mjs",
     "install": "node --experimental-modules src/install.mjs",
-    "mocks": "node --experimental-modules src/mocks.mjs"
+    "mocks": "node --experimental-modules src/mocks.mjs",
+    "lint": "eslint --fix src/**.mjs"
   },
   "author": "Angélo LIMA",
   "license": "ISC",
@@ -19,5 +20,8 @@
     "request": "2.88.0",
     "winston": "3.2.1",
     "winston-pretty-console": "0.1.1"
+  },
+  "devDependencies": {
+    "eslint": "6.8.0"
   }
 }
