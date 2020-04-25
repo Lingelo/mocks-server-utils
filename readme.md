@@ -5,14 +5,14 @@ Il permet de mocker n'importe quel backend fournissant des APIs REST.
 
 ## Démarrage rapide
 
-# En local
+### En local
 * Installer le server `npm install`.
 * Démarrer le server `npm start`.
 * Lancer la scrutation des mocks : `npm run mocks`.
 
 Pour ajouter de nouveaux `mocks`, ajouter un fichier `.json` sous `mocks` puis y ajouter le `stubning` qui mock l'url souhaitée. Voir doucmentation [ici](http://wiremock.org/docs/stubbing/). 
 
-# Paramétrage
+### Paramétrage
 
 L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 
@@ -27,7 +27,7 @@ L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 | proxy-http  | Chaîne de configuration du proxy http                              |                   |
 | verbose     | Rendre le server verbeux                                           | true              |
 
-# Via image docker (périmée)
+### Via image docker (périmée)
 
 * Recupérer l'image docker : `docker pull freuhlon/mockserver:lastest`
 * Lancer un container jettable : `docker run -d -p 1080:1080 --name mockserver --rm freuhlon/mockserver
