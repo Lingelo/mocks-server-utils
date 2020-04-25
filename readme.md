@@ -21,10 +21,11 @@ L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 | port        | Port du server de mock 1080                                        | 1080              |
 | host        | URI du server de mock                                              | localhost         |
 | log-level   | Niveau de log du server de mock                                    | INFO              |
-| watch-delay | Délais de scrutation (millisecondes) du répertoire de mocks        | 5000              |
+| watch-delay | Délais de scrutation (millisecondes) du répertoire de mocks        | 2000              |
 | mocks-path  | Chemin vers le répertoire où sont les mocks                        |                   |
 | repository  | Chemin vers le repository maven contenant le jar du server de mock | (Voir fichier)    |
 | proxy-http  | Chaîne de configuration du proxy http                              |                   |
+| verbose     | Rendre le server verbeux                                           | true              |
 
 # Via image docker (périmée)
 

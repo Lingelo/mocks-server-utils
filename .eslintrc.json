@@ -28,7 +28,7 @@
         "no-duplicate-imports": "error",
         "no-empty": "error",
         "no-debugger": "error",
-        "no-console": ["error", { "allow": ["warn", "error"] }],
+        "no-console": ["error", { "allow": ["warn", "error", "log"] }],
         "eqeqeq": ["error", "always"],
         "curly": "error",
         "quotes": ["error", "single"]
