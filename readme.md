@@ -41,4 +41,3 @@ L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 | repository  | Chemin vers le repository maven contenant le jar du server de mock | (Voir fichier)    |
 | proxy-http  | Chaîne de configuration du proxy http                              | KO Pour le moment |
 | verbose     | Rendre le server verbeux                                           | true              |
-`
