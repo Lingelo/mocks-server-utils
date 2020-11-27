@@ -1,28 +1,29 @@
-import fs from 'fs';
-import request from 'request';
-import md5File from 'md5-file';
-import { properties } from './utils/properties';
-import { logger } from './utils/logger';
+import fs = require("fs");
+import md5File = require("md5-file");
+import request = require("request");
+import {logger} from "./utils/logger";
+import {properties} from "./utils/properties";
+import ErrnoException = NodeJS.ErrnoException;
 
-const mocksFolder = properties.get('mocks-path') ? properties.get('mocks-path') : process.cwd() + '/mocks/';
+const mocksFolder = properties.get("mocks-path") ? properties.get("mocks-path") : process.cwd() + "/mocks/";
 const hashes = [];
 let isProcessing = false;
 
 function run() {
     checkServerStatus()
-        .then(() => setInterval(createMocks, properties.get('watch-delay')))
-        .catch(() => process.exit())
+        .then(() => setInterval(createMocks, properties.get("watch-delay")))
+        .catch(() => process.exit());
 }
 
 function checkServerStatus() {
     return new Promise((resolve, reject) => {
-        request.get(`http://${properties.get('host')}:${properties.get('port')}/__admin/requests/`)
-            .on('error', () => {
-                logger.error('Server déconnecté.');
+        request.get(`http://${properties.get("host")}:${properties.get("port")}/__admin/requests/`)
+            .on("error", () => {
+                logger.error("Server déconnecté.");
                 reject();
             })
-            .on('data', () => {
-                logger.info('Server connecté.');
+            .on("data", () => {
+                logger.info("Server connecté.");
                 resolve();
             });
     });
@@ -30,45 +31,44 @@ function checkServerStatus() {
 
 function createMocks() {
 
-    if(isProcessing) {
+    if (isProcessing) {
         return;
     }
 
     fs.readdir(mocksFolder, (err, files) => {
         if (!files) {
-            logger.error('Dossier mocks invalide, arrêt du processus.');
+            logger.error("Dossier mocks invalide, arrêt du processus.");
             process.exit();
         }
 
         let filesToProcess = files;
 
-        files.forEach(file => {
+        files.forEach((file) => {
 
-            const hash = md5File.sync(mocksFolder + '/' + file);
+            const hash = md5File.sync(mocksFolder + "/" + file);
 
-
-            fs.readFile(mocksFolder + '/' + file, 'utf8', (err, data) => {
-                if (err) {
-                    throw new Error(JSON.stringify(err))
+            fs.readFile(mocksFolder + "/" + file, "utf8", (error: ErrnoException | null, data: string) => {
+                if (error) {
+                    throw new Error(JSON.stringify(error));
                 }
 
                 data = setCorsHeaders(data);
 
                 const option = {
-                    uri: `http://${properties.get('host')}:${properties.get('port')}/__admin/mappings/new`,
                     body: data,
-                    method: 'POST'
+                    method: "POST",
+                    uri: `http://${properties.get("host")}:${properties.get("port")}/__admin/mappings/new`,
                 };
 
                 request(option)
-                    .on('error', () => {
-                        logger.warn('Le server s\'est déconnecté, arrêt du processus...');
+                    .on("error", () => {
+                        logger.warn("Le server s'est déconnecté, arrêt du processus...");
                         process.exit();
                     })
-                    .on('response', (res) => {
+                    .on("response", (res) => {
 
                         if (!hashes.includes(hash)) {
-                            hashes.push(hash)
+                            hashes.push(hash);
                         } else {
                             return;
                         }
@@ -89,10 +89,10 @@ function createMocks() {
 
 function setCorsHeaders(data) {
 
-    const number = data.indexOf('"status": ');
+    const statusCode = data.indexOf('"status": ');
 
     const headers = '"headers":\n' +
-        '    {\n' +
+        "    {\n" +
         '      "Content-Type" : "application/json",\n' +
         '      "Access-Control-Allow-Origin" : "*",\n' +
         '      "Access-Control-Allow-Methods" : "*",\n' +
@@ -100,9 +100,10 @@ function setCorsHeaders(data) {
         '      "X-Content-Type-Options" : "nosniff",\n' +
         '      "x-frame-options" : "DENY",\n' +
         '      "x-xss-protection" : "1; mode=block"\n' +
-        '    },'
+        "    },";
 
-    data = data.slice(0, number + '"status": '.length + 4) + headers + data.slice(number + '"status": '.length + 4);
+    data = data.slice(0, statusCode + '"status": '.length + 4)
+        + headers + data.slice(statusCode + '"status": '.length + 4);
 
     return data;
 }

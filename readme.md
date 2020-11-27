@@ -1,14 +1,29 @@
-# Utilitaire de server de mocks
+# Mock server utils
 
-Ce projet permet de démarrer rapidement [http://wiremock.org/](http://wiremock.org//) avec des mocks paramétrés.
-Il permet de mocker n'importe quel backend fournissant des APIs REST.
+Mocks server utils est un outil permettant de démarrer un server de mocks d'APIs REST rapidement. 
+
+L'outil est idéal pour : 
+* Partager des mocks pendant la phase de développement d'un projet IT. 
+* Simuler un server lors de la phase de tests automatisés.
+
+Facile à utiliser : Se base sur la syntaxe de mocks du projet [http://wiremock.org/](http://wiremock.org//).
+Mock server utils consomme les mocks au format json dans un répertoire (`mocks`par défaut). 
+Hot reload : A l'ajout d'un nouveau nouveau mock à chaud : le mock est consommé directement. 
 
 ## Démarrage rapide
 
+## Prérequis 
+
+| Soft   | Version | 
+|--------|---------|
+| nodeJs | `>= 10` |
+| JAVA   | `>= 8`  |
+
 ### En local
-* Installer le server `npm install`.
+
+* Installer les dépendance du server `npm install`.
 * Démarrer le server `npm start`.
-* Lancer la scrutation des mocks : `npm run mocks`.
+* Lancer le hot reload des mocks : `npm run mocks`.
 
 Pour ajouter de nouveaux `mocks`, ajouter un fichier `.json` sous `mocks` puis y ajouter le `stubning` qui mock l'url souhaitée. Voir doucmentation [ici](http://wiremock.org/docs/stubbing/). 
 
@@ -24,11 +39,6 @@ L'utilitaire se configure à travers le fichier `mocks-server.properties`.
 | watch-delay | Délais de scrutation (millisecondes) du répertoire de mocks        | 2000              |
 | mocks-path  | Chemin vers le répertoire où sont les mocks                        |                   |
 | repository  | Chemin vers le repository maven contenant le jar du server de mock | (Voir fichier)    |
-| proxy-http  | Chaîne de configuration du proxy http                              |                   |
+| proxy-http  | Chaîne de configuration du proxy http                              | KO Pour le moment |
 | verbose     | Rendre le server verbeux                                           | true              |
-
-### Via image docker (périmée)
-
-* Recupérer l'image docker : `docker pull freuhlon/mockserver:lastest`
-* Lancer un container jettable : `docker run -d -p 1080:1080 --name mockserver --rm freuhlon/mockserver
 `
