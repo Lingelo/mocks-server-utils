@@ -1,43 +1,43 @@
 # Mock server utils
 
-Mocks server utils est un outil permettant de démarrer un server de mocks d'APIs REST rapidement. 
+Mocks server utils is a tool for quickly starting a REST API mocks server.
 
-L'outil est idéal pour : 
-* Partager des mocks pendant la phase de développement d'un projet IT. 
-* Simuler un server lors de la phase de tests automatisés.
+The tool is ideal for:
+* Share mocks during the development phase of an IT project. 
+* Simulate a server during the automated testing phase.
 
-Facile à utiliser : Se base sur la syntaxe de mocks du projet [http://wiremock.org/](http://wiremock.org//).
-Mock server utils consomme les mocks au format json dans un répertoire (`mocks`par défaut). 
-Hot reload : A l'ajout d'un nouveau nouveau mock à chaud : le mock est consommé directement. 
+Easy to use : Based on the mocks syntax of wiremock project [http://wiremock.org/](http://wiremock.org//).
+Mock server utils consume mocks in json format in a directory (`mocks` by default).
+Hot reload : Mocks can be injected while the server is running. 
 
-## Démarrage rapide
+## Get started
 
-## Prérequis 
+## Prerequisite 
 
-| Soft   | Version | 
-|--------|---------|
-| nodeJs | `>= 10` |
-| JAVA   | `>= 8`  |
+| Dependency   | Version | 
+|--------------|---------|
+| nodeJs       | `>= 10` |
+| JAVA         | `>= 8`  |
 
-### En local
+### On your post
 
-* Installer les dépendance du server `npm install`.
-* Démarrer le server `npm start`.
-* Lancer le hot reload des mocks : `npm run mocks`.
+* Install dependencies `npm install`.
+* Start the server `npm start`.
+* Start the mocks hot reload : `npm run mocks`.
 
-Pour ajouter de nouveaux `mocks`, ajouter un fichier `.json` sous `mocks` puis y ajouter le `stubning` qui mock l'url souhaitée. Voir doucmentation [ici](http://wiremock.org/docs/stubbing/). 
+To add new `mocks`, add a` .json` file under `mocks` then add the` stubning` which mocks the desired url. See documentation [here](http://wiremock.org/docs/stubbing/). 
 
-### Paramétrage
+### Setting
 
-L'utilitaire se configure à travers le fichier `mocks-server.properties`.
+This utility can be configured through the `mocks-server.properties` file.
 
-| Propriété   | Description                                                        | Valeur par défaut |
+| Property    | Description                                                        | Default value     |
 |-------------|--------------------------------------------------------------------|-------------------|
-| port        | Port du server de mock 1080                                        | 1080              |
-| host        | URI du server de mock                                              | localhost         |
-| log-level   | Niveau de log du server de mock                                    | INFO              |
-| watch-delay | Délais de scrutation (millisecondes) du répertoire de mocks        | 2000              |
-| mocks-path  | Chemin vers le répertoire où sont les mocks                        |                   |
-| repository  | Chemin vers le repository maven contenant le jar du server de mock | (Voir fichier)    |
-| proxy-http  | Chaîne de configuration du proxy http                              | KO Pour le moment |
-| verbose     | Rendre le server verbeux                                           | true              |
+| port        | Mock server port 1080                                              | 1080              |
+| host        | Mock server host                                                   | localhost         |
+| log-level   | Mock server log level                                              | INFO              |
+| watch-delay | Polling times (milliseconds) of the mocks director                 | 2000              |
+| mocks-path  | Path to the directory where the mocks are                          |                   |
+| repository  | Path to the maven repository containing the jar of the mock server | (Voir fichier)    |
+| proxy-http  | HTTP proxy configuration string                                    | KO for the moment |
+| verbose     | Make the server verbose                                            | true              |

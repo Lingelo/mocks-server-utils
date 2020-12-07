@@ -19,11 +19,11 @@ function checkServerStatus() {
     return new Promise((resolve, reject) => {
         request.get(`http://${properties.get("host")}:${properties.get("port")}/__admin/requests/`)
             .on("error", () => {
-                logger.error("Server déconnecté.");
+                logger.error("Server disconnected.");
                 reject();
             })
             .on("data", () => {
-                logger.info("Server connecté.");
+                logger.info("Server connected.");
                 resolve();
             });
     });
@@ -37,7 +37,7 @@ function createMocks() {
 
     fs.readdir(mocksFolder, (err, files) => {
         if (!files) {
-            logger.error("Dossier mocks invalide, arrêt du processus.");
+            logger.error("Invalid mocks folder, process shutdown.");
             process.exit();
         }
 
@@ -62,7 +62,7 @@ function createMocks() {
 
                 request(option)
                     .on("error", () => {
-                        logger.warn("Le server s'est déconnecté, arrêt du processus...");
+                        logger.warn("The server has disconnected, the process is stopping ...");
                         process.exit();
                     })
                     .on("response", (res) => {
@@ -74,9 +74,9 @@ function createMocks() {
                         }
 
                         if (res.statusCode >= 200 && res.statusCode < 400) {
-                            logger.info(`Mock ${file} créé.`);
+                            logger.info(`Mock ${file} created.`);
                         } else {
-                            logger.error(`Mock ${file} non créé.`);
+                            logger.error(`Mock ${file} not created.`);
                         }
 
                         filesToProcess = removeProcessedFile(filesToProcess, file);

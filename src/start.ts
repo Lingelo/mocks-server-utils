@@ -6,7 +6,7 @@ import {logger} from "./utils/logger";
 const dir = process.cwd() + "/bin/mocks-server.jar";
 
 if (!fs.existsSync(dir)) {
-    logger.error("Aucun server détecté. Lancer la commande : npm install");
+    logger.error("No server detected. Run the command: npm install");
     process.exit();
 }
 
@@ -21,5 +21,5 @@ mockServer.stderr.on("data", (data) => {
 });
 
 mockServer.on("exit", () => {
-    console.error("Fin du process.");
+    console.error("End of the process.");
 });

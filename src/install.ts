@@ -16,15 +16,15 @@ if (properties.get("http-proxy")) {
     // request = request.defaults({ proxy: properties.get('http-proxy') });
 }
 
-logger.info("Début de récupération de mockserver.jar.");
+logger.info("Getting mockserver.jar ...");
 
 request.get({
     uri: properties.get("repository"),
 })
     .pipe(file)
     .on("finish", () => {
-        logger.info("Le fichier est téléchargé.");
+        logger.info("Jar downloaded.");
     })
     .on("error", (error) => {
-        logger.error("Impossible de récupérer le fichier", error);
+        logger.error("Impossible to download the jar :", error);
     });
