@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "md5-file": "5.0.0",
-    "properties-reader": "1.0.0",
+    "properties-reader": "2.2.0",
     "request": "2.88.0",
     "winston": "3.2.1",
     "winston-pretty-console": "0.1.1"
